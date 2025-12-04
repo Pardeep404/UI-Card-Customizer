@@ -3,7 +3,7 @@ import { Github, Linkedin } from "lucide-react";
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.png";
-import spaceImg from "../assets/Space.jpg";
+import spaceImg from "../assets/space.jpg";
 import mountainImg from "../assets/mountain.jpg";
 import bachImg from "../assets/beach.jpg";
 import BG from "../assets/BG.jpg";
@@ -96,13 +96,11 @@ function CardUI() {
               Solid
             </button>
             <button
-              onClick={() => setBackgroundImg(`url(${Gradient})`)}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Gradient
             </button>
             <button
-              onClick={() => setBackgroundImg(`url(${Upload})`)}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Upload
