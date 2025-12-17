@@ -7,15 +7,34 @@ import spaceImg from "../assets/space.jpg";
 import mountainImg from "../assets/mountain.jpg";
 import bachImg from "../assets/beach.jpg";
 import BG from "../assets/BG.jpg";
+import { color } from "framer-motion";
 
 function CardUI() {
   const [backgroundImg, setBackgroundImg] = useState(`url(${BG})`);
   const [cardImg, setCardImg] = useState(img1);
   const [cardBorder, setCardBorder] = useState("");
-  const [cadShadow, setCadShadow] = useState("");
+  const [cadShadow, setCadShadow] = useState("shadow-xl");
+  const [cardTheme, setCardTheme] = useState("bg-white");
+  const [cardShape, setCardShape] = useState("rounded-2xl");
 
   const removeCardImg = () => {
     setCardImg(null);
+  };
+
+  const handleBgUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+    setBackgroundImg(`url(${url})`);
+  };
+
+  const handleCardUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+    setCardImg(url);
   };
   return (
     <div
@@ -23,15 +42,15 @@ function CardUI() {
       style={{ backgroundImage: backgroundImg }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-black/50 z-0"></div>
 
       {/* LEFT CARD */}
-      <div className="w-full md:w-1/2 flex justify-center relative z-10">
+      <div className="w-full md:w-1/2 flex justify-center relative z-10 ">
         <div
-          className={`w-[92%] sm:w-[80%] md:w-[75%] lg:w-[55%] xl:w-[40%] rounded-2xl p-4 bg-white ${cardBorder} ${cadShadow}`}
+          className={`w-[92%] sm:w-[80%] md:w-[75%] lg:w-[55%] xl:w-[40%]  p-4 ${cardShape}  ${cardBorder} ${cadShadow} ${cardTheme} relative z-20`}
         >
           <div className="flex justify-center">
-            <img src={cardImg} alt="img" className="rounded w-full" />
+            <img src={cardImg} alt="img" className={` w-full ${cardShape}`} />
           </div>
 
           <h2 className="text-center font-bold text-xl mt-2">Pardeep</h2>
@@ -89,18 +108,15 @@ function CardUI() {
             >
               Beach
             </button>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleBgUpload}
+              hidden
+              id="bgUpload"
+            />
             <button
-              onClick={() => setBackgroundImg(`url(${spaceImg})`)}
-              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
-            >
-              Solid
-            </button>
-            <button
-              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
-            >
-              Gradient
-            </button>
-            <button
+              onClick={() => document.getElementById("bgUpload").click()}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Upload
@@ -130,13 +146,21 @@ function CardUI() {
               Image 3
             </button>
             <button
-              onClick={() => setCardImg(removeCardImg)}
+              onClick={() => setCardImg(null)}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Remove
             </button>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleCardUpload}
+              hidden
+              id="cardUpload"
+            />
+
             <button
-              onClick={() => setCardImg(`url(${Upload})`)}
+              onClick={() => document.getElementById("cardUpload").click()}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Upload
@@ -147,19 +171,34 @@ function CardUI() {
           <fieldset className="shadow p-2 rounded-lg flex flex-wrap justify-center items-center gap-2 relative z-10">
             <legend className="px-2 text-sm font-semibold">Card Themes</legend>
 
-            <button className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200">
+            <button
+              onClick={() => setCardTheme("bg-black text-white")}
+              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
+            >
               Theme 1
             </button>
-            <button className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200">
+            <button
+              onClick={() => setCardTheme("bg-amber-400 text-gray-900")}
+              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
+            >
               Theme 2
             </button>
-            <button className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200">
+            <button
+              onClick={() => setCardTheme("bg-slate-800 text-slate-100")}
+              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
+            >
               Theme 3
             </button>
-            <button className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200">
+            <button
+              onClick={() => setCardTheme("bg-rose-500 text-white")}
+              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
+            >
               Theme 4
             </button>
-            <button className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200">
+            <button
+              onClick={() => setCardTheme("bg-emerald-600 text-white")}
+              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
+            >
               Theme 5
             </button>
           </fieldset>
@@ -213,13 +252,22 @@ function CardUI() {
           <fieldset className="shadow p-2 rounded-lg flex flex-wrap justify-center items-center gap-2 relative z-10">
             <legend className="px-2 text-sm font-semibold">Card Shape</legend>
 
-            <button className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200">
+            <button
+              onClick={() => setCardShape("rounded-2xl")}
+              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
+            >
               Rounded
             </button>
-            <button className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200">
+            <button
+              onClick={() => setCardShape("rounded-none")}
+              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
+            >
               Square
             </button>
-            <button className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200">
+            <button
+              onClick={() => setCardShape("rounded-full")}
+              className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
+            >
               Circle
             </button>
           </fieldset>
@@ -245,14 +293,14 @@ function CardUI() {
             >
               Deep
             </button>
-            <button
+            {/* <button
               onClick={() =>
                 setCadShadow("shadow-[0_0_20px_rgba(255,255,255,0.6)]")
               }
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Glow
-            </button>
+            </button> */}
             <button
               onClick={() => setCadShadow("none")}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
