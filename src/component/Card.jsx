@@ -7,13 +7,12 @@ import spaceImg from "../assets/space.jpg";
 import mountainImg from "../assets/mountain.jpg";
 import bachImg from "../assets/beach.jpg";
 import BG from "../assets/BG.jpg";
-import { color } from "framer-motion";
 
 function CardUI() {
   const [backgroundImg, setBackgroundImg] = useState(`url(${BG})`);
   const [cardImg, setCardImg] = useState(img1);
   const [cardBorder, setCardBorder] = useState("");
-  const [cadShadow, setCadShadow] = useState("shadow-xl");
+  const [cardShadow, setCardShadow] = useState("shadow-[0_0_30px_rgba(255,255,255,0.5)]");
   const [cardTheme, setCardTheme] = useState("bg-white");
   const [cardShape, setCardShape] = useState("rounded-2xl");
 
@@ -47,7 +46,9 @@ function CardUI() {
       {/* LEFT CARD */}
       <div className="w-full md:w-1/2 flex justify-center relative z-10 ">
         <div
-          className={`w-[92%] sm:w-[80%] md:w-[75%] lg:w-[55%] xl:w-[40%]  p-4 ${cardShape}  ${cardBorder} ${cadShadow} ${cardTheme} relative z-20`}
+          className={`w-[92%] sm:w-[80%] md:w-[75%] lg:w-[55%] xl:w-[40%]
+  p-4 ${cardShape} ${cardBorder} ${cardShadow} ${cardTheme}
+  relative z-20 transition-shadow duration-300`}
         >
           <div className="flex justify-center">
             <img src={cardImg} alt="img" className={` w-full ${cardShape}`} />
@@ -276,33 +277,33 @@ function CardUI() {
           <fieldset className="shadow p-2 rounded-lg flex flex-wrap justify-center items-center gap-2 relative z-10">
             <legend className="px-2 text-sm font-semibold">Card Shadow</legend>
             <button
-              onClick={() => setCadShadow("shadow-sm")}
+              onClick={() => setCardShadow("shadow-[0_0_20px_rgba(255,255,255,0.4)]")}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Soft
             </button>
             <button
-              onClick={() => setCadShadow("shadow-md")}
+              onClick={() => setCardShadow("shadow-[0_0_30px_rgba(255,255,255,0.5)]")}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Medium
             </button>
             <button
-              onClick={() => setCadShadow("shadow-lg")}
+              onClick={() => setCardShadow("shadow-[0_0_45px_rgba(255,255,255,0.7)]")}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Deep
             </button>
-            {/* <button
+            <button
               onClick={() =>
-                setCadShadow("shadow-[0_0_20px_rgba(255,255,255,0.6)]")
+                setCardShadow("shadow-[0_0_60px_rgba(255,255,255,0.9)]")
               }
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               Glow
-            </button> */}
+            </button>
             <button
-              onClick={() => setCadShadow("none")}
+              onClick={() => setCardShadow("shadow-none")}
               className="border px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:scale-101 transition duration-200"
             >
               None
